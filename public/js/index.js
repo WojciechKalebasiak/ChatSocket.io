@@ -9,6 +9,7 @@ $('#message-form').on('submit', function (e) {
         function (e) {
 
         });
+    $['[name=message'].val('');
 
 });
 socket.on('newMessage', function (data) {
