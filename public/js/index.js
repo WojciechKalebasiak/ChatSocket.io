@@ -13,24 +13,16 @@ $('#message-form').on('submit', function (e) {
 
 });
 socket.on('newMessage', function (data) {
+    var template = $("#message-template").html();
     var formattedTime = moment(data.createdAt).format('HH:mm');
-    var li = $('<li>');
-    li.text(`${data.from} ${formattedTime}: ${data.text}`);
-    $('#messages').append(li);
+    var html = Mustache.render(template, { text: data.text, from: data.from, createdAt: formattedTime });
+    $('#messages').append(html);
 });
 socket.on('newLocationMessage', function (data) {
     var formattedTime = moment(data.createdAt).format('HH:mm');
-    var li = $('<li>');
-    var a = $('<a>');
-
-    a.text('Click here to get my location!');
-    a.attr('href', `${data.url}`);
-    a.attr('target', '_blank');
-
-    li.text(`${data.from} ${formattedTime}: `);
-    li.append(a);
-
-    $('#messages').append(li);
+    var template = $('#location-message-template').html();
+    var html = Mustache.render(template, {from:data.from, createdAt:formattedTime, url:data.url});
+    $('#messages').append(html);
 });
 var locationButton = $('#send-location');
 locationButton.on('click', function () {
