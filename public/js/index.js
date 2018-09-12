@@ -13,12 +13,13 @@ $('#message-form').on('submit', function (e) {
 
 });
 socket.on('newMessage', function (data) {
+    var formattedTime = moment(data.createdAt).format('HH:mm');
     var li = $('<li>');
-    li.text(`${data.from}: ${data.text}`);
+    li.text(`${data.from} ${formattedTime}: ${data.text}`);
     $('#messages').append(li);
 });
 socket.on('newLocationMessage', function (data) {
-    var locationButton = $('#send-location');
+    var formattedTime = moment(data.createdAt).format('HH:mm');
     var li = $('<li>');
     var a = $('<a>');
 
@@ -26,7 +27,7 @@ socket.on('newLocationMessage', function (data) {
     a.attr('href', `${data.url}`);
     a.attr('target', '_blank');
 
-    li.text(`${data.from}: `);
+    li.text(`${data.from} ${formattedTime}: `);
     li.append(a);
 
     $('#messages').append(li);
