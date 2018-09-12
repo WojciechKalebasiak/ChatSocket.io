@@ -4,12 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ChatApp</title>
 </head>
 
 <body>
     <p>Welcome to the chat app</p>
+    <form id="message-form">
+        <input type="text" name="message" placeholder="Message"/>
+        <button>Send</button>
+    </form>
+    <ul id="messages"></ul>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/libs/jquery.js"></script>
     <script src="/js/index.js"></script>
 </body>
 
