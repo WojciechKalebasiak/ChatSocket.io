@@ -2,10 +2,14 @@
   "name": "node-chat-app",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node" :"8.11.3"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon --exec \"node server/server.js\""
+    "watch": "nodemon --exec \"node server/server.js\"",
+    "start": "node server/server.js"
   },
   "keywords": [],
   "author": "",
