@@ -13,6 +13,25 @@ function scrollToBottom() {
         messages.scrollTop(scrollHeight);
     }
 }
+socket.on('updateUserList', function (users) {
+    var ul = $('<ul>');
+    users.forEach(function (user) {
+        ul.append($('<li>').text(user));
+    });
+    $('#users').html(ul);
+});
+socket.on('connect', function () {
+    var params = $.deparam(window.location.search);
+    socket.emit('join', params, function (err) {
+        if (err) {
+            alert(err);
+            window.location.href = '/';
+        }
+        else {
+            console.log('No error');
+        }
+    });
+});
 $('#message-form').on('submit', function (e) {
     e.preventDefault();
     socket.emit('createMessage',
